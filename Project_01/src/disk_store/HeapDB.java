@@ -10,9 +10,12 @@ import java.util.List;
 /**
  * A heap file implementation of the DB interface. Record layout within blocks
  * uses a bit map.
- * 
- * @author Glenn modified. 3/14/2020 Changed block 1 bitmap. Bit=1 means block
- *         has empty space. David
+ *
+ * @author Glenn modified.
+ *         David 3/14/2020 Changed block 1 bitmap.
+ *               Bit=1 means block is full
+ *               Bit=0 means block has empty space for at least 1 row
+ *
  *
  */
 
@@ -81,7 +84,7 @@ public class HeapDB implements DB, Iterable<Record> {
 
 	/**
 	 * Create a new, empty database with the given schema.
-	 * 
+	 *
 	 * @param filename
 	 * @param schema
 	 */
@@ -118,7 +121,7 @@ public class HeapDB implements DB, Iterable<Record> {
 
 	/**
 	 * Open an existing heap database. The schema is read from the database file.
-	 * 
+	 *
 	 * @param filename
 	 * @return
 	 */
@@ -178,7 +181,7 @@ public class HeapDB implements DB, Iterable<Record> {
 	 * Return the number of records in the database. Note: this does a linear
 	 * search, so is slow. It would be better to keep an instance variable that
 	 * tracks the current size.
-	 * 
+	 *
 	 * @return
 	 */
 	public int size() {
@@ -217,8 +220,11 @@ public class HeapDB implements DB, Iterable<Record> {
 				}
 				// index maintenance
 				// YOUR CODE HERE
-				for(int i = 0; i < index.length; i++){
-					//if statement
+				for (int i=0; i< indexes.length; i++) {
+					if (indexes[i]!=null) {
+						// maintain index[i],
+//						indexes[i].insert( <<column value>>, blockNum );
+					}
 				}
 
 				return true;
@@ -264,9 +270,14 @@ public class HeapDB implements DB, Iterable<Record> {
 							blockMap.setBit(blockNum, false);
 							bf.write(bitmapBlock, blockmapBuffer);
 						}
-							// index maintenance
-							// YOUR CODE HERE
-
+						// index maintenance
+						// YOUR CODE HERE
+						for (int i=0; i< indexes.length; i++) {
+							if (indexes[i]!=null) {
+								// maintain index[i],
+//								indexes[i].delete(<<column value>>, blockNum );
+							}
+						}
 						return true;
 					}
 				}
@@ -301,10 +312,18 @@ public class HeapDB implements DB, Iterable<Record> {
 		List<Record> result = new ArrayList<Record>();
 
 		// YOUR CODE HERE
-		if (indexes[fieldNum] == null) {
-			// no index on this col. do linear
+		if (indexes[fieldNum]==null) {
+			// no index on this column.  do linear scan
+			// add all records into "result"
+			for (Record rec : this) {
+				// ...
+			}
+
 		} else {
-			// index exists
+			// do index lookup
+			// returns a list of block numbers
+			// call lookupInBlock to get the actual records
+			// add records into "result'
 		}
 
 		// You should use an index for the lookup if an index is
@@ -405,6 +424,9 @@ public class HeapDB implements DB, Iterable<Record> {
 		// YOUR CODE HERE
 		// for each record in the DB, you will need to insert its
 		// search key value and the block number
+		for (Record r: this) {
+//			index.insert( key,  block number? );
+		}
 
 		throw new UnsupportedOperationException();
 	}
@@ -496,20 +518,20 @@ public class HeapDB implements DB, Iterable<Record> {
 
 	/**
 	 * An alternative to toString() that is useful for debugging.
-	 * 
+	 *
 	 * @return
 	 */
 	public String toStringDiagnostic() {
 		StringBuffer sb = new StringBuffer();
 		Record rec = schema.blankRecord();
-		
+
 		// read and print the block bitmap
 		bf.read(bitmapBlock, blockmapBuffer);
 		sb.append("Block bitmap:  " + blockMap);
 
 		for (int blockNum = bitmapBlock + 1; blockNum <= bf.getLastBlockIndex(); blockNum++) {
 			bf.read(blockNum, buffer);
-			// print the record bitmap of block 
+			// print the record bitmap of block
 			sb.append("Block " + blockNum + "\n");
 			sb.append("Record bitmap: " + recMap + "\n");
 			int recsOnLine = 0;
