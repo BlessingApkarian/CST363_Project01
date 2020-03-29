@@ -8,7 +8,7 @@ import java.util.List;
  * @author Glenn
  *
  */
-
+//comment
 public interface DB {
 	/**
 	 * Insert the given record, return true on success.
