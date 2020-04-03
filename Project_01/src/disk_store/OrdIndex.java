@@ -45,13 +45,14 @@ public class OrdIndex implements DBIndex {
 
 		List<Integer> result = new ArrayList<>();
 
-		int l = entries.get(0).key;
-		int r = entries.get(entries.size() - 1).key;
+		// binary search
+		int l = 0;
+		int r = entries.size() - 1;
 
 		while (l <= r) {
-			int m = l + (r - l) / 2;
+			int m = (int) Math.floor(l + (r - l) / 2);
 
-			// Check if key is present at mid
+			// if key is present at mid, add block numbers to result
 			if (entries.get(m).key == key){
 				for(int i = 0; i < entries.get(m).blocks.size(); i++) {
 					result.add(entries.get(m).blocks.get(i).blockNo);
@@ -77,23 +78,40 @@ public class OrdIndex implements DBIndex {
 
 		BlockCount b = new BlockCount();
 		b.blockNo = blockNum;
-		b.count = 1;
+		e.blocks = new ArrayList<BlockCount>();
 
-		e.blocks.add(b);
+		e.blocks.add(0, b);
 
-		int l = entries.get(0).key;
-		int r = entries.get(entries.size() - 1).key;
+		// if list is empty, insert first entry
+		if(entries.isEmpty()){
+			entries.add(0, e);
+			entries.get(0).blocks.get(0).count++;
+			return;
+		}
+		// if key is grater than all current keys, insert back
+		if(entries.get(entries.size() - 1).key < key) {
+			entries.add(e);
+			return;
+		}
+		// if key is smaller than all entries, insert front
+		if(entries.get(0).key > key){
+			entries.add(e);
+			return;
+		}
+
+
+		// Binary search
+		int l = 0;
+		int r = entries.size() - 1;
 
 		while (l <= r) {
-			int m = l + (r - l) / 2;
+			int m = (int) Math.floor(l + (r - l) / 2);
 
-			// Check if key is present at mid
-			if (entries.get(m).key == key){
-				return;
-			}
-
-			if(key > entries.get(m - 1).key && key < entries.get(m + 1).key){
-				entries.add(m, e);
+			// if key exists, insert block number into existing blocks arrayList
+			if (entries.get(m).key == key) {
+				entries.get(m).blocks.add(b);
+				int newBlockIdx = entries.get(m).blocks.size() - 1;
+				entries.get(m).blocks.get(newBlockIdx).count++;
 				return;
 			}
 
@@ -104,7 +122,14 @@ public class OrdIndex implements DBIndex {
 			}
 		}
 
-		throw new UnsupportedOperationException();
+		// if key doesnt exist, sorted insert
+		for(int i = 1; i < entries.size() - 1; i++){
+			if(entries.get(i - 1).key < key && entries.get(i + 1).key > key){
+				entries.add(i, e);
+				return;
+			}
+		}
+
 	}
 
 	@Override
@@ -122,7 +147,7 @@ public class OrdIndex implements DBIndex {
 	 * @return
 	 */
 	public int size() {
-		return size;
+		return entries.size();
 		// you may find it useful to implement this
 
 	}
