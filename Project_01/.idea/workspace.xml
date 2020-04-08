@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a0062eb8-53c4-45cc-bff2-f227d9fa8946" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Project_01/disk_store/OrdIndex.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project_01/disk_store/OrdIndex.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/disk_store/OrdIndex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/disk_store/OrdIndex.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -31,8 +32,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/disk_store/OrdIndex.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="438">
-              <caret line="69" column="22" lean-forward="true" selection-start-line="69" selection-start-column="22" selection-end-line="69" selection-end-column="22" />
+            <state relative-caret-position="361">
+              <caret line="67" column="20" lean-forward="true" selection-start-line="67" selection-start-column="20" selection-end-line="67" selection-end-column="20" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#617#618#0" expanded="true" />
@@ -123,7 +124,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1586388403279" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1586388408403" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Libraries" />
@@ -229,20 +230,11 @@
       <workItem from="1585685365341" duration="10000" />
       <workItem from="1585864202345" duration="8786000" />
       <workItem from="1585937528507" duration="422000" />
-      <workItem from="1586385750320" duration="2412000" />
+      <workItem from="1586385750320" duration="2683000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="OrdIndexTest_testDelete - 2020.04.08 at 16h 04m 36s.xml">
-      <configuration name="OrdIndexTest.testDelete" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="OrdIndexTest_testDelete - 2020.04.08 at 16h 05m 44s.xml">
-      <configuration name="OrdIndexTest.testDelete" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="OrdIndexTest_testDelete - 2020.04.08 at 16h 07m 43s.xml">
-      <configuration name="OrdIndexTest.testDelete" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="OrdIndexTest_testDelete - 2020.04.08 at 16h 09m 40s.xml">
       <configuration name="OrdIndexTest.testDelete" configurationId="JUnit" />
     </history-entry>
@@ -264,9 +256,18 @@
     <history-entry file="OrdIndexTest_testDeleteLookup - 2020.04.08 at 16h 19m 43s.xml">
       <configuration name="OrdIndexTest.testDeleteLookup" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="OrdIndexTest_testDeleteLookup - 2020.04.08 at 16h 23m 07s.xml">
+      <configuration name="OrdIndexTest.testDeleteLookup" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="OrdIndexTest_testDeleteLookup - 2020.04.08 at 16h 25m 39s.xml">
+      <configuration name="OrdIndexTest.testDeleteLookup" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="OrdIndexTest - 2020.04.08 at 16h 26m 26s.xml">
+      <configuration name="OrdIndexTest" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16672000" />
+    <option name="totallyTimeSpent" value="16943000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -359,8 +360,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/disk_store/OrdIndex.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="438">
-          <caret line="69" column="22" lean-forward="true" selection-start-line="69" selection-start-column="22" selection-end-line="69" selection-end-column="22" />
+        <state relative-caret-position="361">
+          <caret line="67" column="20" lean-forward="true" selection-start-line="67" selection-start-column="20" selection-end-line="67" selection-end-column="20" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#617#618#0" expanded="true" />
