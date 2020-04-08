@@ -55,6 +55,9 @@ public class OrdIndex implements DBIndex {
 			// if key is present at mid, add block numbers to result
 			if (entries.get(m).key == key){
 				for(int i = 0; i < entries.get(m).blocks.size(); i++) {
+					if(result.contains(entries.get(m).blocks.get(i).blockNo)){
+						continue;
+					}
 					result.add(entries.get(m).blocks.get(i).blockNo);
 				}
 				break;
@@ -66,7 +69,7 @@ public class OrdIndex implements DBIndex {
 				r = m - 1;
 			}
 		}
-
+//		System.out.println(result.toString());
 		return result;
 	}
 
@@ -134,12 +137,48 @@ public class OrdIndex implements DBIndex {
 
 	@Override
 	public void delete(int key, int blockNum) {
+//		System.out.printf("Begin: ");
+//		System.out.println(this.size());
+
 		// lookup key
+		List<Integer> record = lookup(key);
+//		System.out.println(record.toString());
+
 		//  if key not found, should not occur.  Ignore it.
+		if(record.isEmpty()){
+//			System.out.printf("Quit");
+			return;
+		}
+
 		//  decrement count for blockNum.
-		//  if count is now 0, remove the blockNum.
-		//  if there are no block number for this key, remove the key entry.
-		throw new UnsupportedOperationException();
+		for(int i = 0; i < entries.size(); i++){
+			if(entries.get(i).key == key){
+//				System.out.printf("Key Found\n");
+				for(int j = 0; j < entries.get(i).blocks.size(); j++){
+					if(entries.get(i).blocks.get(j).blockNo == blockNum){
+//						System.out.printf("Block No. Found\n");
+						entries.get(i).blocks.get(j).count--;
+						entries.get(i).blocks.remove(j);
+						break;
+					}
+					//  if count is now 0, remove the blockNum.
+					if(entries.get(i).blocks.get(j).count == 0){
+//						System.out.printf("Zero count\n");
+						entries.get(i).blocks.remove(j);
+						break;
+					}
+					//  if there are no block number for this key, remove the key entry.
+					if(entries.get(i).blocks.isEmpty()){
+//						System.out.printf("No Blocks left\n");
+						entries.remove(i);
+						break;
+					}
+				}
+			}
+		}
+
+//		System.out.printf("Fin: ");
+//		System.out.println(this.size());
 	}
 
 	/**
@@ -147,9 +186,13 @@ public class OrdIndex implements DBIndex {
 	 * @return
 	 */
 	public int size() {
-		return entries.size();
+//		return entries.size();
 		// you may find it useful to implement this
-
+		int size = 0;
+		for(int i = 0; i < entries.size(); i++){
+			size += entries.get(i).blocks.size();
+		}
+		return size;
 	}
 
 	@Override

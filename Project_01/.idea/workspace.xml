@@ -31,13 +31,14 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/disk_store/OrdIndex.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-55">
-              <caret line="54" column="68" selection-start-line="54" selection-start-column="68" selection-end-line="54" selection-end-column="68" />
+            <state relative-caret-position="438">
+              <caret line="69" column="22" lean-forward="true" selection-start-line="69" selection-start-column="22" selection-end-line="69" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#617#618#0" expanded="true" />
                 <element signature="e#651#652#0" expanded="true" />
-                <element signature="e#3256#3257#0" expanded="true" />
+                <element signature="e#3201#3202#0" expanded="true" />
+                <element signature="e#3249#3250#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -46,8 +47,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/OrdIndexTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="269">
-              <caret line="40" column="18" selection-start-line="40" selection-start-column="8" selection-end-line="40" selection-end-column="18" />
+            <state relative-caret-position="255">
+              <caret line="70" column="45" lean-forward="true" selection-start-line="70" selection-start-column="8" selection-end-line="70" selection-end-column="45" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -79,6 +80,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -112,7 +114,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -122,7 +123,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1585872814414" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1586388403279" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Libraries" />
@@ -141,7 +142,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.OrdIndexTest.testLookup">
+  <component name="RunManager" selected="JUnit.OrdIndexTest">
     <configuration name="OrdIndexTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Project_01" />
       <extension name="coverage">
@@ -153,6 +154,38 @@
       <option name="PACKAGE_NAME" value="test" />
       <option name="MAIN_CLASS_NAME" value="test.OrdIndexTest" />
       <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="OrdIndexTest.testDelete" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Project_01" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="test.OrdIndexTest" />
+      <option name="METHOD_NAME" value="testDelete" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="OrdIndexTest.testDeleteLookup" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Project_01" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="test.OrdIndexTest" />
+      <option name="METHOD_NAME" value="testDeleteLookup" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -175,8 +208,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.OrdIndexTest.testLookup" />
         <item itemvalue="JUnit.OrdIndexTest" />
+        <item itemvalue="JUnit.OrdIndexTest.testDeleteLookup" />
+        <item itemvalue="JUnit.OrdIndexTest.testDelete" />
+        <item itemvalue="JUnit.OrdIndexTest.testLookup" />
       </list>
     </recent_temporary>
   </component>
@@ -192,50 +227,52 @@
       <updated>1585518176876</updated>
       <workItem from="1585518180551" duration="5042000" />
       <workItem from="1585685365341" duration="10000" />
-      <workItem from="1585864202345" duration="8374000" />
+      <workItem from="1585864202345" duration="8786000" />
+      <workItem from="1585937528507" duration="422000" />
+      <workItem from="1586385750320" duration="2412000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="OrdIndexTest_testLookup - 2020.04.02 at 16h 44m 35s.xml">
-      <configuration name="OrdIndexTest.testLookup" configurationId="JUnit" />
+    <history-entry file="OrdIndexTest_testDelete - 2020.04.08 at 16h 04m 36s.xml">
+      <configuration name="OrdIndexTest.testDelete" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="OrdIndexTest_testLookup - 2020.04.02 at 16h 47m 48s.xml">
-      <configuration name="OrdIndexTest.testLookup" configurationId="JUnit" />
+    <history-entry file="OrdIndexTest_testDelete - 2020.04.08 at 16h 05m 44s.xml">
+      <configuration name="OrdIndexTest.testDelete" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="OrdIndexTest_testLookup - 2020.04.02 at 16h 48m 53s.xml">
-      <configuration name="OrdIndexTest.testLookup" configurationId="JUnit" />
+    <history-entry file="OrdIndexTest_testDelete - 2020.04.08 at 16h 07m 43s.xml">
+      <configuration name="OrdIndexTest.testDelete" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="OrdIndexTest_testLookup - 2020.04.02 at 16h 51m 06s.xml">
-      <configuration name="OrdIndexTest.testLookup" configurationId="JUnit" />
+    <history-entry file="OrdIndexTest_testDelete - 2020.04.08 at 16h 09m 40s.xml">
+      <configuration name="OrdIndexTest.testDelete" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="OrdIndexTest_testLookup - 2020.04.02 at 16h 54m 43s.xml">
-      <configuration name="OrdIndexTest.testLookup" configurationId="JUnit" />
+    <history-entry file="OrdIndexTest_testDelete - 2020.04.08 at 16h 11m 49s.xml">
+      <configuration name="OrdIndexTest.testDelete" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="OrdIndexTest_testLookup - 2020.04.02 at 17h 01m 59s.xml">
-      <configuration name="OrdIndexTest.testLookup" configurationId="JUnit" />
+    <history-entry file="OrdIndexTest_testDelete - 2020.04.08 at 16h 12m 47s.xml">
+      <configuration name="OrdIndexTest.testDelete" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="OrdIndexTest_testLookup - 2020.04.02 at 17h 02m 50s.xml">
-      <configuration name="OrdIndexTest.testLookup" configurationId="JUnit" />
+    <history-entry file="OrdIndexTest - 2020.04.08 at 16h 13m 01s.xml">
+      <configuration name="OrdIndexTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="OrdIndexTest_testLookup - 2020.04.02 at 17h 04m 44s.xml">
-      <configuration name="OrdIndexTest.testLookup" configurationId="JUnit" />
+    <history-entry file="OrdIndexTest_testDeleteLookup - 2020.04.08 at 16h 15m 36s.xml">
+      <configuration name="OrdIndexTest.testDeleteLookup" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="OrdIndexTest_testLookup - 2020.04.02 at 17h 06m 55s.xml">
-      <configuration name="OrdIndexTest.testLookup" configurationId="JUnit" />
+    <history-entry file="OrdIndexTest_testDeleteLookup - 2020.04.08 at 16h 18m 06s.xml">
+      <configuration name="OrdIndexTest.testDeleteLookup" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="OrdIndexTest_testLookup - 2020.04.02 at 17h 08m 39s.xml">
-      <configuration name="OrdIndexTest.testLookup" configurationId="JUnit" />
+    <history-entry file="OrdIndexTest_testDeleteLookup - 2020.04.08 at 16h 19m 43s.xml">
+      <configuration name="OrdIndexTest.testDeleteLookup" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13426000" />
+    <option name="totallyTimeSpent" value="16672000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17095852" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17525035" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -277,18 +314,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/disk_store/HeapDB.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6225">
-          <caret line="428" column="9" selection-start-line="428" selection-start-column="9" selection-end-line="428" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#8961#8962#0" expanded="true" />
-            <element signature="e#9009#9010#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-engine/1.4.2/junit-platform-engine-1.4.2.jar!/org/junit/platform/engine/support/hierarchical/ThrowableCollector.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
@@ -310,10 +335,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/disk_store/HeapDB.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6225">
+          <caret line="428" column="9" selection-start-line="428" selection-start-column="9" selection-end-line="428" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#8961#8962#0" expanded="true" />
+            <element signature="e#9009#9010#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/OrdIndexTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="40" column="18" selection-start-line="40" selection-start-column="8" selection-end-line="40" selection-end-column="18" />
+        <state relative-caret-position="255">
+          <caret line="70" column="45" lean-forward="true" selection-start-line="70" selection-start-column="8" selection-end-line="70" selection-end-column="45" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -322,13 +359,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/disk_store/OrdIndex.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-55">
-          <caret line="54" column="68" selection-start-line="54" selection-start-column="68" selection-end-line="54" selection-end-column="68" />
+        <state relative-caret-position="438">
+          <caret line="69" column="22" lean-forward="true" selection-start-line="69" selection-start-column="22" selection-end-line="69" selection-end-column="22" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#617#618#0" expanded="true" />
             <element signature="e#651#652#0" expanded="true" />
-            <element signature="e#3256#3257#0" expanded="true" />
+            <element signature="e#3201#3202#0" expanded="true" />
+            <element signature="e#3249#3250#0" expanded="true" />
           </folding>
         </state>
       </provider>
