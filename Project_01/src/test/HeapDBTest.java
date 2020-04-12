@@ -24,7 +24,7 @@ import disk_store.Schema;
 class HeapDBTest {
 	
 	static Random rand;
-	static String dbFilename = "c:/dbheap/temp3.txt";
+	static String dbFilename = "temp3.txt";
 	static Schema schema;
 	
 	@BeforeAll
@@ -75,6 +75,10 @@ class HeapDBTest {
 		// test insert, delete, and lookup operations
 		
 		HeapDB db = new HeapDB(dbFilename, schema);
+
+		System.out.printf("Test: \n");
+		System.out.println(dbFilename);
+		System.out.println(db.toString());
 
 		// test insert
 		Record rec1 = createTestRecord(1,2,3);

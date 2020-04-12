@@ -194,6 +194,9 @@ public class HeapDB implements DB, Iterable<Record> {
 
 	@Override
 	public boolean insert(Record rec) {
+
+		System.out.printf("Begin\n");
+
 		// make sure no record with rec's key is already in the database
 		if (lookup(rec.getKey()) != null) {
 			return false;
@@ -202,15 +205,29 @@ public class HeapDB implements DB, Iterable<Record> {
 		// iterate over valid blocks and see if there is space
 		bf.read(bitmapBlock, blockmapBuffer); // read the bitmap block
 		int blockNum = blockMap.firstZero(); // get first block with space.
+
+//		System.out.println(blockNum);
+
 		// check that blockNum is a valid block
 		if (blockNum > 1 && blockNum <= bf.getLastBlockIndex()) {
 			// block i is valid, so see if it has room for a new record
 			bf.read(blockNum, buffer);
 			int recNum = recMap.firstZero();
+
+//			System.out.println(recNum);
+
 			if (recNum >= 0) {
 				// write record to buffer, set bit in bit map, write to file
 				int loc = recordLocation(recNum);
+
+//				System.out.println(loc);
+//				System.out.println(rec);
+
 				rec.serialize(buffer.buffer, loc);
+
+//				System.out.println(rec);
+//				System.out.println(recNum);
+
 				recMap.setBit(recNum, true);
 				bf.write(blockNum, buffer);
 				// if block is now full, update blockMap to no space and save blockMap to disk.
@@ -220,12 +237,24 @@ public class HeapDB implements DB, Iterable<Record> {
 				}
 				// index maintenance
 				// YOUR CODE HERE
+
+				System.out.println(indexes.length);
+
 				for (int i=0; i< indexes.length; i++) {
+					System.out.println(indexes[i]);
 					if (indexes[i]!=null) {
 						// maintain index[i],
-//						indexes[i].insert( <<column value>>, blockNum );
+//                        System.out.println(rec.getKey());
+                        indexes[i].insert(rec.getKey(), blockNum);
+					} else {
+						DBIndex index = new OrdIndex();
+						for(int j = 0; j < rec.fields.size(); j++){
+							initializeIndex(schema.getFieldIndex(rec.fields.get(j).toString()), index);
+						}
 					}
 				}
+
+				System.out.printf("\nEnd");
 
 				return true;
 
@@ -315,15 +344,21 @@ public class HeapDB implements DB, Iterable<Record> {
 		if (indexes[fieldNum]==null) {
 			// no index on this column.  do linear scan
 			// add all records into "result"
+//			System.out.printf("No index");
 			for (Record rec : this) {
-				// ...
+				result.add(rec);
 			}
 
 		} else {
+//			System.out.printf("Found index");
 			// do index lookup
 			// returns a list of block numbers
+			List<Integer> r =indexes[fieldNum].lookup(key);
 			// call lookupInBlock to get the actual records
-			// add records into "result'
+			for(Integer block : r){
+				// add records into "result'
+				result = lookupInBlock(fieldNum, key, block);
+			}
 		}
 
 		// You should use an index for the lookup if an index is
@@ -336,7 +371,7 @@ public class HeapDB implements DB, Iterable<Record> {
 		// }
 
 		// replace the following line with your return statement
-		throw new UnsupportedOperationException();
+		return result;
 	}
 
 	// Perform a linear search in the block with the given blockNum
@@ -424,13 +459,31 @@ public class HeapDB implements DB, Iterable<Record> {
 		// YOUR CODE HERE
 		// for each record in the DB, you will need to insert its
 		// search key value and the block number
-		for (Record r: this) {
-//			index.insert( key,  block number? );
+		int blockNum; // get first block with space.
+		System.out.println(blockMap.toString());
+		for(int i = 0; i < blockMap.size(); i++){
+			if(blockMap.getBit(i)){
+
+			}
 		}
 
-		throw new UnsupportedOperationException();
-	}
+		// check that blockNum is a valid block
+		if (blockNum > 1 && blockNum <= bf.getLastBlockIndex()) {
+			// block i is valid, so see if it has room for a new record
+			bf.read(blockNum, buffer);
+			int recNum = recMap.firstZero();
+			if (recNum >= 0) {
+				// write record to buffer, set bit in bit map, write to file
+				int loc = recordLocation(recNum);
+				index.insert(record.getKey(), blockNum);
+			}
 
+			this.DBIterator();
+
+
+
+		}
+	}
 	/**
 	 * Delete the index for the given field. Do nothing if no index exists for the
 	 * given field.
