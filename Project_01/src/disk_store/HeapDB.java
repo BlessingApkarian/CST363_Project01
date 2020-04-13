@@ -314,6 +314,9 @@ public class HeapDB implements DB, Iterable<Record> {
 	@Override
 	public List<Record> lookup(String fname, int key) {
 		int fieldNum = schema.getFieldIndex(fname);
+
+		System.out.println(fieldNum);
+
 		if (fieldNum < 0) {
 			throw new IllegalArgumentException("Field '" + fname + "' not in schema.");
 		}
@@ -326,31 +329,31 @@ public class HeapDB implements DB, Iterable<Record> {
 			// add all records into "result"
 			System.out.printf("No index\n");
 			for (Record rec : this) {
-				result.add(rec);
+				if (((IntField)rec.fields.get(fieldNum)).getValue() == key) {
+					result.add(rec);
+				}
 			}
-
 		} else {
 			System.out.printf("Found index\n");
 			// do index lookup
 			// returns a list of block numbers
+//			System.out.println(indexes[fieldNum]);
 			List<Integer> r = indexes[fieldNum].lookup(key);
 			// if r is empty the key is not primary
-			if(r.isEmpty()){
-				System.out.printf("Not primary Key\n");
-				for (Record rec : this) {
-					System.out.printf("value @C: %s\n", rec.fields.get(fieldNum).toString());
-					if(rec.fields.get(fieldNum).equals(key)){
-						result.add(rec);
-					}
-				}
-			}
-			// call lookupInBlock to get the actual records
-			else{
-				for(Integer block : r){
+//			if(schema.getKey() != fname){
+//			for (Record rec : this) {
+////					System.out.printf("value @C: %s\n", rec.fields.get(fieldNum).toString());
+//				if (rec.fields.get(fieldNum).equals(key)) {
+//					result.add(rec);
+//				}
+//			}
+//			} else {
+				// call lookupInBlock to get the actual records
+				for (Integer block : r) {
 					// add records into "result'
 					result = lookupInBlock(fieldNum, key, block);
 				}
-			}
+//			}
 		}
 
 		// You should use an index for the lookup if an index is
@@ -468,7 +471,7 @@ public class HeapDB implements DB, Iterable<Record> {
 					// record j is present; check its key value
 					int loc = recordLocation(recNum);
 					rec.deserialize(buffer.buffer, loc);
-					index.insert(rec.getKey(), blockNum);
+					indexes[fieldNum].insert(rec.getKey(), blockNum);
 				}
 			}
 		}

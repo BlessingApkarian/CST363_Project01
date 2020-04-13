@@ -187,7 +187,7 @@ class HeapDBTest {
 		rand = new Random(42);  // set seed for repeatability
 		insertRecords(db, numRecords);
 		
-		System.out.println(db);
+//		System.out.println(db);
 		// lookup records with field c value of 3
 		List<Record> recs = db.lookup("c", 3);
 		System.out.println("ONE "+recs.size());
