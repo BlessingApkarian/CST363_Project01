@@ -1,3 +1,8 @@
+/*
+* Authors: Blayne & Blessing
+* Date: 03-29 to 4-13 2020
+ */
+
 package disk_store;
 
 
@@ -51,7 +56,6 @@ public class OrdIndex implements DBIndex {
 
 		while (l <= r) {
 			int m = (int) Math.floor(l + (r - l) / 2);
-
 			// if key is present at mid, add block numbers to result
 			if (entries.get(m).key == key){
 				for(int i = 0; i < entries.get(m).blocks.size(); i++) {
@@ -91,17 +95,6 @@ public class OrdIndex implements DBIndex {
 			entries.get(0).blocks.get(0).count++;
 			return;
 		}
-		// if key is grater than all current keys, insert back
-		if(entries.get(entries.size() - 1).key < key) {
-			entries.add(e);
-			return;
-		}
-		// if key is smaller than all entries, insert front
-		if(entries.get(0).key > key){
-			entries.add(e);
-			return;
-		}
-
 
 		// Binary search
 		int l = 0;
@@ -125,6 +118,17 @@ public class OrdIndex implements DBIndex {
 			}
 		}
 
+		// if key is grater than all current keys, insert back
+		if(entries.get(entries.size() - 1).key < key) {
+			entries.add(e);
+			return;
+		}
+		// if key is smaller than all entries, insert front
+		if(entries.get(0).key > key){
+			entries.add(e);
+			return;
+		}
+
 		// if key doesnt exist, sorted insert
 		for(int i = 1; i < entries.size() - 1; i++){
 			if(entries.get(i - 1).key < key && entries.get(i + 1).key > key){
@@ -137,48 +141,36 @@ public class OrdIndex implements DBIndex {
 
 	@Override
 	public void delete(int key, int blockNum) {
-//		System.out.printf("Begin: ");
-//		System.out.println(this.size());
-
 		// lookup key
 		List<Integer> record = lookup(key);
-//		System.out.println(record.toString());
 
 		//  if key not found, should not occur.  Ignore it.
 		if(record.isEmpty()){
-//			System.out.printf("Quit");
 			return;
 		}
 
 		//  decrement count for blockNum.
 		for(int i = 0; i < entries.size(); i++){
 			if(entries.get(i).key == key){
-//				System.out.printf("Key Found\n");
 				for(int j = 0; j < entries.get(i).blocks.size(); j++){
 					if(entries.get(i).blocks.get(j).blockNo == blockNum){
-//						System.out.printf("Block No. Found\n");
 						entries.get(i).blocks.get(j).count--;
 						entries.get(i).blocks.remove(j);
 						break;
 					}
 					//  if count is now 0, remove the blockNum.
 					if(entries.get(i).blocks.get(j).count == 0){
-//						System.out.printf("Zero count\n");
 						entries.get(i).blocks.remove(j);
 						break;
 					}
 					//  if there are no block number for this key, remove the key entry.
 					if(entries.get(i).blocks.isEmpty()){
-//						System.out.printf("No Blocks left\n");
 						entries.remove(i);
 						break;
 					}
 				}
 			}
 		}
-
-//		System.out.printf("Fin: ");
-//		System.out.println(this.size());
 	}
 
 	/**

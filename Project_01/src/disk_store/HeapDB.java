@@ -1,5 +1,7 @@
-// Authors: Blayne & Blessing
-// Date: 03-29-2020
+/*
+ * Authors: Blayne & Blessing
+ * Date: 03-29 to 4-13 2020
+ */
 
 package disk_store;
 
@@ -220,7 +222,6 @@ public class HeapDB implements DB, Iterable<Record> {
 
 				// if block is now full, update blockMap to no space and save blockMap to disk.
 				if (recMap.firstZero() < 0) {
-					System.out.printf("recMap.firstZero() < 0");
 					blockMap.setBit(blockNum, true);
 					bf.write(bitmapBlock, blockmapBuffer);
 				}
@@ -284,7 +285,7 @@ public class HeapDB implements DB, Iterable<Record> {
 						for (int i=0; i< indexes.length; i++) {
 							if (indexes[i]!=null) {
 								// maintain index[i],
-//								indexes[i].delete(<<column value>>, blockNum );
+								indexes[i].delete(rec.getKey(), blockNum);
 							}
 						}
 						return true;
@@ -315,8 +316,6 @@ public class HeapDB implements DB, Iterable<Record> {
 	public List<Record> lookup(String fname, int key) {
 		int fieldNum = schema.getFieldIndex(fname);
 
-		System.out.println(fieldNum);
-
 		if (fieldNum < 0) {
 			throw new IllegalArgumentException("Field '" + fname + "' not in schema.");
 		}
@@ -327,45 +326,22 @@ public class HeapDB implements DB, Iterable<Record> {
 		if (indexes[fieldNum]==null) {
 			// no index on this column.  do linear scan
 			// add all records into "result"
-			System.out.printf("No index\n");
 			for (Record rec : this) {
 				if (((IntField)rec.fields.get(fieldNum)).getValue() == key) {
 					result.add(rec);
 				}
 			}
 		} else {
-			System.out.printf("Found index\n");
 			// do index lookup
 			// returns a list of block numbers
-//			System.out.println(indexes[fieldNum]);
 			List<Integer> r = indexes[fieldNum].lookup(key);
-			// if r is empty the key is not primary
-//			if(schema.getKey() != fname){
-//			for (Record rec : this) {
-////					System.out.printf("value @C: %s\n", rec.fields.get(fieldNum).toString());
-//				if (rec.fields.get(fieldNum).equals(key)) {
-//					result.add(rec);
-//				}
-//			}
-//			} else {
-				// call lookupInBlock to get the actual records
-				for (Integer block : r) {
-					// add records into "result'
-					result = lookupInBlock(fieldNum, key, block);
-				}
-//			}
+			// call lookupInBlock to get the actual records
+			for (Integer block : r) {
+				// add records into "result'
+				result.addAll(lookupInBlock(fieldNum, key, block));
+			}
 		}
 
-		// You should use an index for the lookup if an index is
-		// available on the given field. If not perform a linear
-		// search over the records in the DB. The iterator makes
-		// it easy to perform a linear search, using code like
-		// this:
-		// for (Record rec : this) {
-		// ...
-		// }
-
-		// replace the following line with your return statement
 		return result;
 	}
 
@@ -463,15 +439,16 @@ public class HeapDB implements DB, Iterable<Record> {
 				System.out.printf("BlockMap is empty\n");
 				break;
 			}
-//			System.out.printf(" BlockNum: %d\n", blockNum);
 			bf.read(blockNum, buffer);
 			for (int recNum = 0; recNum < recMap.size(); recNum++) {
 				if (recMap.getBit(recNum)) {
-//					System.out.printf(" RecordNum: %d\n", recNum);
 					// record j is present; check its key value
 					int loc = recordLocation(recNum);
 					rec.deserialize(buffer.buffer, loc);
-					indexes[fieldNum].insert(rec.getKey(), blockNum);
+					//maybe add a check if null
+					indexes[fieldNum] = index;
+//					indexes[fieldNum].insert(rec.getKey(), blockNum);
+					indexes[fieldNum].insert(((IntField)rec.fields.get(fieldNum)).getValue(), blockNum);
 				}
 			}
 		}

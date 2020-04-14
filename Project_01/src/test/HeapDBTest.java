@@ -76,10 +76,6 @@ class HeapDBTest {
 		
 		HeapDB db = new HeapDB(dbFilename, schema);
 
-		System.out.printf("Test: \n");
-		System.out.println(dbFilename);
-		System.out.println(db.toString());
-
 		// test insert
 		Record rec1 = createTestRecord(1,2,3);
 		Record rec2 = createTestRecord(2,3,4);
@@ -170,7 +166,6 @@ class HeapDBTest {
 		int x = db.size();
 		System.out.println(x);
 		assertTrue(x == 4);
-		System.out.println(db.toString());
 		
 		db.close();
  	}
@@ -186,8 +181,7 @@ class HeapDBTest {
 		db.createOrderedIndex();
 		rand = new Random(42);  // set seed for repeatability
 		insertRecords(db, numRecords);
-		
-//		System.out.println(db);
+
 		// lookup records with field c value of 3
 		List<Record> recs = db.lookup("c", 3);
 		System.out.println("ONE "+recs.size());
